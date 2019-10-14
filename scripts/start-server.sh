@@ -55,22 +55,16 @@ else
 fi
 
 echo "---Prepare Server---"
-echo "---Checking for 'saves' directory---"
-if [ ! -d ${SERVER_DIR}/saves ]; then
-	echo "---'saves' not found creating---"
-    mkdir ${SERVER_DIR}/saves
-fi
-echo "---Directory 'saves' found!---"
 
 echo "---Checking for 'config.cfg'---"
-if [ ! -f ${SERVER_DIR}/config/config.cfg ]; then
+if [ ! -f ${SERVER_DIR}/config.cfg ]; then
 	echo "---'config.cfg' not found downloading---"
     if [ ! -d ${SERVER_DIR}/config ]; then
     	mkdir ${SERVER_DIR}/config
     fi
-    cd ${SERVER_DIR}/config
-    wget -qi ${SERVER_DIR}/config/config.cfg https://raw.githubusercontent.com/ich777/docker-steamcmd-server/theforest/config/config.cfg
-    if [ -f ${SERVER_DIR}/config/config.cfg ]; then
+    cd ${SERVER_DIR}
+    wget -qi ${SERVER_DIR}/config.cfg https://raw.githubusercontent.com/ich777/docker-steamcmd-server/dayz/config/config.cfg
+    if [ -f ${SERVER_DIR}/config.cfg ]; then
     	echo "---'config.cfg' successfully downloaded---"
     else
     	echo "---Something went wrong, can't download 'config.cfg'---"
@@ -80,6 +74,9 @@ fi
 chmod -R 770 ${DATA_DIR}
 echo "---Server ready---"
 
+echo "---Sleep zZz---"
+sleep infinity
+
 echo "---Start Server---"
 cd ${SERVER_DIR}
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine ${SERVER_DIR}/TheForestDedicatedServer.exe -batchmode -dedicated -savefolderpath "${SERVER_DIR}/saves/" -configfilepath "${SERVER_DIR}/config/config.cfg" ${GAME_PARAMS}
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine ${SERVER_DIR}/DayZServer_x64.exe -config=config.cfg -port=2302  -dologs -adminlog -netlog -freezecheck ${GAME_PARAMS}
