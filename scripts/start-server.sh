@@ -96,9 +96,6 @@ find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
 chmod -R 777 ${DATA_DIR}
 echo "---Server ready---"
 
-echo "---Sleep zZz---"
-sleep infinity
-
 echo "---Start Server---"
 cd ${SERVER_DIR}
 xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/DayZServer_x64.exe -config=config.cfg -port=2302  -dologs -adminlog -netlog -freezecheck ${GAME_PARAMS}
