@@ -58,7 +58,24 @@ else
 fi
 
 echo "---Prepare Server---"
-
+export WINEARCH=win64
+export WINEPREFIX=/serverdata/serverfiles/WINE64
+echo "---Checking if WINE workdirectory is present---"
+if [ ! -d ${SERVER_DIR}/WINE64 ]; then
+	echo "---WINE workdirectory not found, creating please wait...---"
+    mkdir ${SERVER_DIR}/WINE64
+else
+	echo "---WINE workdirectory found---"
+fi
+echo "---Checking if WINE is properly installed---"
+if [ ! -d ${SERVER_DIR}/WINE64/drive_C/windows ]; then
+	echo "---Setting up WINE---"
+    cd ${SERVER_DIR}
+    winecfg > /dev/null 2>&1
+    sleep 15
+else
+	echo "---WINE properly set up---"
+fi
 echo "---Checking for 'config.cfg'---"
 if [ ! -f ${SERVER_DIR}/config.cfg ]; then
 	echo "---'config.cfg' not found downloading---"
@@ -74,6 +91,8 @@ if [ ! -f ${SERVER_DIR}/config.cfg ]; then
         sleep infinity
     fi
 fi
+echo "---Checking for old display lock files---"
+find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
 chmod -R 777 ${DATA_DIR}
 echo "---Server ready---"
 
@@ -82,4 +101,4 @@ sleep infinity
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine ${SERVER_DIR}/DayZServer_x64.exe -config=config.cfg -port=2302  -dologs -adminlog -netlog -freezecheck ${GAME_PARAMS}
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/DayZServer_x64.exe -config=config.cfg -port=2302  -dologs -adminlog -netlog -freezecheck ${GAME_PARAMS}
