@@ -82,9 +82,6 @@ find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
 chmod -R 777 ${DATA_DIR}
 echo "---Server ready---"
 
-echo "---Sleep zZz---"
-sleep infinity
-
 echo "---Start Server---"
 cd ${SERVER_DIR}
 xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/Bin64_dedicated/MiscreatedServer.exe +sv_maxplayers ${MAX_PLAYERS} +map islands -sv_port ${GAME_PORT} +http_startserver +sv_servername "${SRV_NAME}" ${GAME_PARAMS}
