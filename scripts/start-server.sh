@@ -87,4 +87,4 @@ sleep infinity
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/CAGGameServer-Win32-Shipping.exe cag_p?steamsockets?Port=${STEAM_SOCK}?PeerPort=${GAME_PORT}?QueryPort=${QUERY_PORT}?MaxPlayers=${MAX_PLAYERS}?allowpvp=0?ServerName="${SRV_NAME}"?gamepassword=${SRV_PWD}${GAME_PARAMS} -seekfreeloadingserver
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/
