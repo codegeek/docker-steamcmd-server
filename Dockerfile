@@ -2,9 +2,9 @@ FROM ich777/winehq-baseimage
 
 MAINTAINER ich777
 
-RUN dpkg --add-architecture i386
-RUN apt-get update
-RUN apt-get -y install lib32gcc1 wget screen xvfb
+RUN dpkg --add-architecture i386 && \
+	apt-get update && \
+	apt-get -y install --no-install-recommends lib32gcc1 wget screen xvfb
 
 ENV DATA_DIR="/serverdata"
 ENV STEAMCMD_DIR="${DATA_DIR}/steamcmd"
@@ -20,20 +20,18 @@ ENV UID=99
 ENV GID=100
 ENV USERNAME=""
 ENV PASSWRD=""
+ENV USER="steam"
+ENV DATA_PERM=770
 
-RUN mkdir $DATA_DIR
-RUN mkdir $STEAMCMD_DIR
-RUN mkdir $SERVER_DIR
-RUN useradd -d $DATA_DIR -s /bin/bash --uid $UID --gid $GID steam
-RUN chown -R steam $DATA_DIR
-
-RUN ulimit -n 2048
+RUN mkdir $DATA_DIR && \
+	mkdir $STEAMCMD_DIR && \
+	mkdir $SERVER_DIR && \
+	useradd -d $DATA_DIR -s /bin/bash $USER && \
+	chown -R $USER $DATA_DIR && \
+	ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 770 /opt/scripts/
-RUN chown -R steam /opt/scripts
-
-USER steam
 
 #Server Start
-ENTRYPOINT ["/opt/scripts/start-server.sh"]
+ENTRYPOINT ["/opt/scripts/start.sh"]
