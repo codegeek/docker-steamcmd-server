@@ -1,6 +1,6 @@
 FROM ich777/winehq-baseimage
 
-LABEL maintainer="admin@minenet.at"
+LABEL maintainer="admin@unraider.net"
 
 RUN apt-get update && \
 	apt-get -y install lib32gcc1 winbind xvfb screen && \
@@ -10,15 +10,19 @@ ENV DATA_DIR="/serverdata"
 ENV STEAMCMD_DIR="${DATA_DIR}/steamcmd"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_ID="template"
-ENV GAME_NAME="template"
 ENV GAME_PARAMS="template"
+ENV GAME_PARAMS_EXTRA="template"
+ENV MAX_PLAYERS="template"
+ENV SERVER_NAME="template"
+ENV SERVER_PASSWORD=""
+ENV SERVER_ADMIN_PASSWORD=""
 ENV GAME_PORT=27015
-ENV VALIDATE=""
+ENV QUERY_PORT=27016
+ENV RCON_PORT=27017
+ENV VALIDATE="true"
 ENV UMASK=000
 ENV UID=99
 ENV GID=100
-ENV USERNAME=""
-ENV PASSWRD=""
 ENV USER="steam"
 ENV DATA_PERM=770
 

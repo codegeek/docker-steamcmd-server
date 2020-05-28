@@ -57,26 +57,6 @@ fi
 echo "---Prepare Server---"
 export WINEARCH=win64
 export WINEPREFIX=/serverdata/serverfiles/WINE64
-echo "---Checking for 'saves' directory---"
-if [ ! -d ${SERVER_DIR}/saves ]; then
-	echo "---'saves' not found creating---"
-    mkdir ${SERVER_DIR}/saves
-fi
-echo "---Directory 'saves' found!---"
-echo "---Checking for 'config.cfg'---"
-if [ ! -f ${SERVER_DIR}/config/config.cfg ]; then
-	echo "---'config.cfg' not found downloading---"
-    if [ ! -d ${SERVER_DIR}/config ]; then
-    	mkdir ${SERVER_DIR}/config
-    fi
-    cd ${SERVER_DIR}/config
-    if wget -q -nc --show-progress --progress=bar:force:noscroll https://raw.githubusercontent.com/ich777/docker-steamcmd-server/theforest/config/config.cfg ; then
-		echo "---Successfully downloaded 'config.cfg'---"
-	else
-		echo "---Something went wrong, can't download 'config.cfg', putting server in sleep mode---"
-		sleep infinity
-	fi
-fi
 echo "---Checking if WINE workdirectory is present---"
 if [ ! -d ${SERVER_DIR}/WINE64 ]; then
 	echo "---WINE workdirectory not found, creating please wait...---"
@@ -100,4 +80,4 @@ echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/TheForestDedicatedServer.exe -batchmode -dedicated -savefolderpath "${SERVER_DIR}/saves/" -configfilepath "${SERVER_DIR}/config/config.cfg" ${GAME_PARAMS}
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/PixARKServer.exe "CubeWorld_Light?listen?MaxPlayers=${MAX_PLAYERS}?SessionName=${SERVER_NAME}?Port=27015?QueryPort=27016?RCONPort=27017?ServerPassword=${SERVER_PASSWORD}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD}?CULTUREFORCOOKING=en" ${GAME_PARAMS} ${GAME_PARAMS_EXTRA}
