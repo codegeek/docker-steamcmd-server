@@ -79,4 +79,4 @@ echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-wine64 ${SERVER_DIR}/ShooterGame/Binaries/Win64/PixARKServer.exe "CubeWorld_Light?listen?MaxPlayers=${MAX_PLAYERS}?SessionName=${SERVER_NAME}?Port=27015?QueryPort=27016?RCONPort=27017?ServerPassword=${SERVER_PASSWORD}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD}?CULTUREFORCOOKING=en" ${GAME_PARAMS} ${GAME_PARAMS_EXTRA}
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/ShooterGame/Binaries/Win64/PixARKServer.exe "CubeWorld_Light?listen?MaxPlayers=${MAX_PLAYERS}?SessionName=${SERVER_NAME}?Port=27015?QueryPort=27016?RCONPort=27017?ServerPassword=${SERVER_PASSWORD}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD}?CULTUREFORCOOKING=en" ${GAME_PARAMS} ${GAME_PARAMS_EXTRA}
