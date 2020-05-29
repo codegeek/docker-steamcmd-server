@@ -79,5 +79,5 @@ chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Server ready---"
 
 echo "---Start Server---"
-cd ${SERVER_DIR}
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/PixARKServer.exe "CubeWorld_Light?listen?MaxPlayers=${MAX_PLAYERS}?SessionName=${SERVER_NAME}?Port=27015?QueryPort=27016?RCONPort=27017?ServerPassword=${SERVER_PASSWORD}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD}?CULTUREFORCOOKING=en" ${GAME_PARAMS} ${GAME_PARAMS_EXTRA}
+cd ${SERVER_DIR}/ShooterGame/Binaries/Win64
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ./PixARKServer.exe "CubeWorld_Light?listen?MaxPlayers=${MAX_PLAYERS}?SessionName=${SERVER_NAME}?Port=27015?QueryPort=27016?RCONPort=27017?ServerPassword=${SERVER_PASSWORD}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD}?CULTUREFORCOOKING=en" ${GAME_PARAMS} ${GAME_PARAMS_EXTRA}
