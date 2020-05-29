@@ -3,7 +3,7 @@ FROM ich777/winehq-baseimage
 LABEL maintainer="admin@unraider.net"
 
 RUN apt-get update && \
-	apt-get -y install lib32gcc1 winbind xvfb screen && \
+	apt-get -y install lib32gcc1 winbind screen && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/serverdata"
